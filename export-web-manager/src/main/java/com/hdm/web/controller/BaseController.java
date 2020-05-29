@@ -1,5 +1,6 @@
 package com.hdm.web.controller;
 
+import com.hdm.domain.system.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,9 +12,7 @@ public class BaseController {
     // 注入request对象
     @Autowired
     protected HttpServletRequest request;
-    // 注入response对象
-    @Autowired
-    protected HttpServletResponse response;
+
     // 注入session对象
     @Autowired
     protected HttpSession session;
@@ -22,13 +21,20 @@ public class BaseController {
      * 获取当前登陆用户所属企业id
      */
     public String getLoginCompanyId(){
-        return "1";
+        return getLoginUser().getCompanyId();
     }
 
     /**
      * 获取当前登陆用户所属企业名称
      */
     public String getLoginCompanyName(){
-        return "传智播客教育股份有限公司";
+        return getLoginUser().getCompanyName();
+    }
+
+    /**
+     * 获取登陆用户对象
+     */
+    public User getLoginUser(){
+        return (User) session.getAttribute("loginUser");
     }
 }

@@ -75,4 +75,18 @@
     <select id="findUserRoleByUserId" resultType="long">
         SELECT COUNT(1) FROM pe_role_user WHERE user_id=#{userId}
     </select>
+
+    <!--根据用户id删除中间表数据-->
+    <delete id="deleteUserRoleByUserId">
+        delete from pe_role_user where user_id =#{userId}
+    </delete>
+
+    <!--#{arg0} 对应方法形参的第一个参数，当方法有多个参数时候使用-->
+    <insert id="saveUserRole">
+        INSERT INTO pe_role_user(user_id,role_id)VALUES(#{arg0},#{arg1});
+    </insert>
+
+    <select id="findByEmail" resultMap="BaseResultMap">
+        SELECT * FROM pe_user WHERE email=#{email}
+    </select>
 </mapper>

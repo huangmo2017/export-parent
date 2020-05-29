@@ -26,4 +26,6 @@ public interface RoleDao {
 
     // 角色添加模块
     void saveRoleModule(String roleId, String moduleId);
+
+    List<Role> findUserRole(String userId);
 }

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <body>
 <div class="pull-left">
@@ -10,16 +10,16 @@
 
 <div class="box-tools pull-right">
     <ul class="pagination" style="margin: 0px;">
-        <li >
+        <li>
             <a href="javascript:goPage(1)" aria-label="Previous">首页</a>
         </li>
         <li><a href="javascript:goPage(${pageInfo.prePage})">上一页</a></li>
 
         <c:forEach
-                begin="1"
-                end="${pageInfo.pages}" var="i">
-            <li class="paginate_button ${pageInfo.pageNum==i ? 'active':''}">
-                <a href="javascript:goPage(${i})">${i}</a>
+                begin="${pageInfo.pageNum-5 > 0 ? pageInfo.pageNum-5 : 1}"
+                end="${pageInfo.pageNum+5 < pageInfo.pages ? pageInfo.pageNum+5 : pageInfo.pages}"
+                var="i">
+            <li class="paginate_button ${pageInfo.pageNum==i ? 'active':''}"><a href="javascript:goPage(${i})">${i}</a>
             </li>
         </c:forEach>
 

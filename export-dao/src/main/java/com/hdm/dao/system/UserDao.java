@@ -23,4 +23,11 @@ public interface UserDao {
 
     // 根据用户id，查询用户角色中间表
     long findUserRoleByUserId(String userId);
+
+    void deleteUserRoleByUserId(String userId);
+
+    //给用户添加角色
+    void saveUserRole(String userId, String roleId);
+
+    User findByEmail(String email);
 }

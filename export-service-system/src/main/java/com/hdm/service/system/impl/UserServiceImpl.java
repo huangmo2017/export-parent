@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.hdm.dao.system.UserDao;
 import com.hdm.domain.system.User;
 import com.hdm.service.system.UserService;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,10 +34,18 @@ public class UserServiceImpl implements UserService {
 
    public void save(User user) {
       user.setId(UUID.randomUUID().toString());
+      if (user.getPassword() != null) {
+         String  encodePwd = new Md5Hash(user.getPassword(), user.getEmail()).toString();
+         user.setPassword(encodePwd);
+      }
       userDao.save(user);
    }
 
    public void update(User user) {
+      if (user.getPassword() != null) {
+         String  encodePwd = new Md5Hash(user.getPassword(), user.getEmail()).toString();
+         user.setPassword(encodePwd);
+      }
       userDao.update(user);
    }
 
@@ -54,5 +63,26 @@ public class UserServiceImpl implements UserService {
 
    public User findById(String id) {
       return userDao.findById(id);
+   }
+
+   @Override
+   public void changeRole(String userId, String[] roleIds) {
+      //DELETE FROM pe_role_user WHERE user_id=''
+      //INSERT INTO pe_role_user(user_id,role_id)VALUES();
+
+      //1） 先解决用户角色关系
+      userDao.deleteUserRoleByUserId(userId);
+
+      //2） 给用户添加角色
+      if (roleIds != null && roleIds.length > 0){
+         for (String roleId : roleIds) {
+            userDao.saveUserRole(userId,roleId);
+         }
+      }
+   }
+
+   @Override
+   public User findByEmail(String email) {
+      return userDao.findByEmail(email);
    }
 }

@@ -2,10 +2,13 @@ package com.hdm.web.controller.system;
 
 import com.github.pagehelper.PageInfo;
 import com.hdm.domain.system.Dept;
+import com.hdm.domain.system.Role;
 import com.hdm.domain.system.User;
 import com.hdm.service.system.DeptService;
+import com.hdm.service.system.RoleService;
 import com.hdm.service.system.UserService;
 import com.hdm.web.controller.BaseController;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -26,9 +29,12 @@ public class UserController extends BaseController {
     private UserService userService;
     @Autowired
     private DeptService deptService;
+    @Autowired
+    private RoleService roleService;
 
     //用户列表分页
     @RequestMapping("/list")
+    @RequiresPermissions("用户管理")
     public String list(
             @RequestParam(defaultValue = "1") int pageNum,
             @RequestParam(defaultValue = "5") int PageSize) {
@@ -110,5 +116,43 @@ public class UserController extends BaseController {
             map.put("message","当前删除的记录被外键引用，删除失败！");
         }
         return map;
+    }
+
+    /**
+     * 从用户列表，进入用户角色页面
+     */
+    @RequestMapping("/roleList")
+    public String roleList(String id) {
+        //1.根据id查询用户
+        User user = userService.findById(id);
+
+        //2.查询所有角色列表
+        List<Role> roleList = roleService.findAll(getLoginCompanyId());
+
+        //3.根据用户id查询用户已经具有的所有的角色集合
+        List<Role> userRoles = roleService.findUserRole(id);
+        //保存角色字符串，如："1,2,3"
+        String userRoleStr = "";
+        for (Role userRole : userRoles) {
+            userRoleStr += userRole.getId()+",";
+        }
+
+        //4. 保存数据
+        request.setAttribute("user",user);
+        request.setAttribute("roleList",roleList);
+        request.setAttribute("userRoleStr",userRoleStr);
+
+        //5.跳转页面
+        return "system/user/user-role";
+    }
+
+    /**
+     * 6. 用户分配角色（2）保存用户角色
+     */
+    @RequestMapping("/changeRole")
+    public String changeRole(String userId,String[] roleIds){
+        // 给用户分配角色
+        userService.changeRole(userId,roleIds);
+        return "redirect:/system/user/list.do";
     }
 }

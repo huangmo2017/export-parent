@@ -3,6 +3,8 @@ package com.hdm.service.system;
 import com.github.pagehelper.PageInfo;
 import com.hdm.domain.system.Role;
 
+import java.util.List;
+
 public interface RoleService {
 
     //根据id查询
@@ -22,4 +24,10 @@ public interface RoleService {
 
     // 角色分配权限
     void updateRoleModule(String roleId, String moduleIds);
+
+    // 查询所有角色
+    List<Role> findAll(String companyId);
+
+    // 根据用户id查询用户的角色
+    List<Role> findUserRole(String userId);
 }

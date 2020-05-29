@@ -71,4 +71,17 @@
         SELECT m.* FROM pe_role_module rm, ss_module m WHERE  rm.module_id = m.module_id
         AND role_id=#{roleId}
     </select>
+
+    <!--根据用户id查询用户所有的模块-->
+    <select id="findModulesByUserId" resultMap="BaseResultMap">
+        SELECT * FROM ss_module WHERE module_id IN (
+        SELECT DISTINCT rm.module_id FROM pe_role_module rm,pe_role_user ru
+        WHERE rm.role_id = ru.role_id AND ru.user_id=#{userId}
+        )
+    </select>
+
+    <!--根据从属belong字段进行查询-->
+    <select id="findModulesByBelong" resultMap="BaseResultMap">
+        SELECT * FROM ss_module WHERE belong=#{belong}
+    </select>
 </mapper>
