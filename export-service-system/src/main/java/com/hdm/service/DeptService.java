@@ -3,14 +3,25 @@ package com.hdm.service;
 import com.github.pagehelper.PageInfo;
 import com.hdm.domain.system.Dept;
 
+import java.util.List;
+
 public interface DeptService {
 
-    /**
-     * 分页查询
-     * @param companyId 公司的id
-     * @param pageNum 当前页
-     * @param pageSize 页大小
-     * @return
-     */
-    PageInfo<Dept> findByPage(String companyId, int pageNum, int pageSize);
+    // 分页查询全部
+    PageInfo<Dept> findByPage(String companyId,int pageNum,int pageSize);
+
+    // 主键查询
+    Dept findById(String id);
+
+    // 查询全部部门
+    List<Dept> findAll(String companyId);
+
+    // 添加
+    void save(Dept dept);
+
+    // 修改
+    void update(Dept dept);
+
+    // 删除
+    boolean delete(String id);
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hdm.dao.system.DeptDao" >
+<mapper namespace="com.hdm.dao.system.DeptDao">
     <resultMap id="BaseResultMap" type="com.hdm.domain.system.Dept">
-        <id     column="dept_id" property="id"></id>
+        <id column="dept_id" property="id"></id>
         <result column="dept_name" property="deptName"></result>
         <result column="state" property="state"></result>
         <result column="company_id" property="companyId"></result>
@@ -31,5 +31,37 @@
     <select id="findById" resultMap="BaseResultMap">
         SELECT * FROM pe_dept where dept_id=#{id}
     </select>
+
+    <!--保存-->
+    <insert id="save">
+        INSERT INTO pe_dept
+        (
+        dept_id,dept_name,parent_id,state,company_id,company_name
+        )
+        VALUES
+        (
+        #{id},#{deptName},#{parent.id},#{state},#{companyId},#{companyName}
+        )
+    </insert>
+
+    <!--更新-->
+    <update id="update">
+        UPDATE pe_dept
+        SET
+        dept_name=#{deptName},
+        parent_id=#{parent.id},
+        state=#{state},
+        company_id=#{companyId},
+        company_name=#{companyName}
+        where dept_id=#{id}
+    </update>
+
+    <select id="findDeptByParentId" resultType="long">
+        SELECT count(1) FROM pe_dept WHERE parent_id=#{id}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM pe_dept WHERE dept_id=#{id}
+    </delete>
 
 </mapper>

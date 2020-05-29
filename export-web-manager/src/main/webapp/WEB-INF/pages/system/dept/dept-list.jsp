@@ -19,7 +19,17 @@
         var id = getCheckId()
         if(id) {
             if(confirm("你确认要删除此条记录吗？")) {
-                location.href="/system/dept/delete.do?id="+id;
+                //location.href="/system/dept/delete.do?id="+id;
+                $.ajax({
+                    url : "/system/dept/delete.do",
+                    data : {"id": id},
+                    dataType : "json",
+                    success : function(jsn){
+                        alert(jsn.message);
+                        // 重新加载当前页面
+                        window.location.reload();
+                    }
+                })
             }
         }else{
             alert("请勾选待处理的记录，且每次只能勾选一个")

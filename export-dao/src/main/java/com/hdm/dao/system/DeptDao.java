@@ -5,15 +5,21 @@ import com.hdm.domain.system.Dept;
 import java.util.List;
 
 public interface DeptDao {
-   /**
-    * 查询全部部门
-    * @param companyId 根据企业id查询
-    * @return
-    */
+   // 查询全部
    List<Dept> findAll(String companyId);
 
-   /**
-    * 根据id查询部门
-    */
+   // 主键查询
    Dept findById(String id);
+
+   // 添加
+   void save(Dept dept);
+
+   // 修改
+   void update(Dept dept);
+
+   // 根据父部门id查询
+   long findDeptByParentId(String id);
+
+   // 删除
+   void delete(String id);
 }
