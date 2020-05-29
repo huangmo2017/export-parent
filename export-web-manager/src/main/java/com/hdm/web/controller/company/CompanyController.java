@@ -1,7 +1,7 @@
 package com.hdm.web.controller.company;
 
 import com.hdm.domain.company.Company;
-import com.hdm.service.CompanyService;
+import com.hdm.service.company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;

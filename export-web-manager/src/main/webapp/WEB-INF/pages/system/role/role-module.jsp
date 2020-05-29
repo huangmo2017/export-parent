@@ -21,7 +21,53 @@
     <script type="text/javascript" src="plugins/ztree/js/jquery.ztree.excheck-3.5.js"></script>
 
     <SCRIPT type="text/javascript">
+        var setting = {
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            }
+        };
+        var treeObj;
+        $(document).ready(function(){
+            $.get(
+                "/system/role/getZtreeNodes.do",
+                {"roleId": $("#roleId").val()},
+                function(zNodes){
+                    // 初始化树
+                    treeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                }
+            );
+        });
 
+        // 获取选中的节点, 提交表单（角色id，权限的ids）
+        function submitCheckedNodes(){
+            //1. 获取选中的节点集合
+            var nodes = treeObj.getCheckedNodes(true);
+
+            //2. 定义一个权限字符串，保存选中的权限。多个权限id用逗号隔开。
+            var moduleIds="";
+
+            //3. 遍历选中的节点
+            for(var i=0;i<nodes.length;i++){
+                //nodes[i] 表示每一个节点，是一个json对象
+                //nodes[i] = { id:1, pId:0, name:"随意勾选 1", open:true},
+                moduleIds += nodes[i].id + ",";
+            }
+
+            //4. 截取去掉最后一个逗号
+            moduleIds = moduleIds.substr(0,moduleIds.length-1);
+
+            //5. 给表单隐藏域中的moduleIds赋值
+            $("#moduleIds").val(moduleIds);
+
+            //6. 提交表单
+            // document.forms[0] 获取页面的第一个表单
+            document.forms[0].submit();
+        }
     </SCRIPT>
 </head>
 
@@ -59,7 +105,7 @@
                     <!--工具栏/-->
                     <!-- 树菜单 -->
                     <form name="icform" method="post" action="/system/role/updateRoleModule.do">
-                        <input type="hidden" name="roleid" value="${role.id}"/>
+                        <input type="hidden" id="roleId" name="roleId" value="${role.id}"/>
                         <input type="hidden" id="moduleIds" name="moduleIds" value=""/>
                         <div class="content_wrap">
                             <div class="zTreeDemoBackground left" style="overflow: visible">

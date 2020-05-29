@@ -90,7 +90,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${page.rows}" var="o"  varStatus="st">
+                    <c:forEach items="${pageInfo.list}" var="o"  varStatus="st">
                         <tr>
                             <td><input type="checkbox" name="id" value="${o.id }"/></td>
                             <td>${status.index+1}</td>

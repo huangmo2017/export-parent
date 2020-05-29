@@ -2,7 +2,7 @@ package com.hdm.web.controller.system;
 
 import com.github.pagehelper.PageInfo;
 import com.hdm.domain.system.Dept;
-import com.hdm.service.DeptService;
+import com.hdm.service.system.DeptService;
 import com.hdm.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

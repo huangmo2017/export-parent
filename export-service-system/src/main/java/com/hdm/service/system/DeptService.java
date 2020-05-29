@@ -1,4 +1,4 @@
-package com.hdm.service;
+package com.hdm.service.system;
 
 import com.github.pagehelper.PageInfo;
 import com.hdm.domain.system.Dept;

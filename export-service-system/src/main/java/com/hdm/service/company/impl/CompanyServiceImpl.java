@@ -1,10 +1,10 @@
-package com.hdm.service.impl;
+package com.hdm.service.company.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hdm.dao.company.CompanyDao;
 import com.hdm.domain.company.Company;
-import com.hdm.service.CompanyService;
+import com.hdm.service.company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
