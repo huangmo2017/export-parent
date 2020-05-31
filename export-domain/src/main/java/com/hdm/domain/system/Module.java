@@ -22,9 +22,9 @@ public class Module implements Serializable {
     private Integer state;
     /**
      * 从属关系
-     *  0：sass系统内部菜单
-     *  1：租用企业菜单
-     */ 
+     * 0：sass系统内部菜单
+     * 1：租用企业菜单
+     */
     private Integer belong;
     private String cwhich;
     private Integer quoteNum;

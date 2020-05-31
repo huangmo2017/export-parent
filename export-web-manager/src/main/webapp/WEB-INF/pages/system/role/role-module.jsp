@@ -32,11 +32,11 @@
             }
         };
         var treeObj;
-        $(document).ready(function(){
+        $(document).ready(function () {
             $.get(
                 "/system/role/getZtreeNodes.do",
                 {"roleId": $("#roleId").val()},
-                function(zNodes){
+                function (zNodes) {
                     // 初始化树
                     treeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
                 }
@@ -44,22 +44,22 @@
         });
 
         // 获取选中的节点, 提交表单（角色id，权限的ids）
-        function submitCheckedNodes(){
+        function submitCheckedNodes() {
             //1. 获取选中的节点集合
             var nodes = treeObj.getCheckedNodes(true);
 
             //2. 定义一个权限字符串，保存选中的权限。多个权限id用逗号隔开。
-            var moduleIds="";
+            var moduleIds = "";
 
             //3. 遍历选中的节点
-            for(var i=0;i<nodes.length;i++){
+            for (var i = 0; i < nodes.length; i++) {
                 //nodes[i] 表示每一个节点，是一个json对象
                 //nodes[i] = { id:1, pId:0, name:"随意勾选 1", open:true},
                 moduleIds += nodes[i].id + ",";
             }
 
             //4. 截取去掉最后一个逗号
-            moduleIds = moduleIds.substr(0,moduleIds.length-1);
+            moduleIds = moduleIds.substr(0, moduleIds.length - 1);
 
             //5. 给表单隐藏域中的moduleIds赋值
             $("#moduleIds").val(moduleIds);
@@ -72,7 +72,7 @@
 </head>
 
 <body style="overflow: visible;">
-<div id="frameContent" class="content-wrapper" style="margin-left:0px;height: 1200px" >
+<div id="frameContent" class="content-wrapper" style="margin-left:0px;height: 1200px">
     <section class="content-header">
         <h1>
             菜单管理

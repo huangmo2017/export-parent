@@ -16,7 +16,7 @@ public class CustomCredentialsMatcher extends SimpleCredentialsMatcher {
         String password = new String((char[]) token.getCredentials());
 
         //3.对用户输入的密码加密、加盐。 把用户名作为盐
-        String md5Password = new Md5Hash(password,username).toString();
+        String md5Password = new Md5Hash(password, username).toString();
 
         //4.获取认证后的正确的密码，即数据库中密码
         String dbPassword = (String) info.getCredentials();

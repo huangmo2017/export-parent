@@ -43,7 +43,7 @@
     <!--3. 配置自定义Realm域 -->
     <bean id="authRealm" class="com.hdm.web.shiro.AuthRealm">
         <!-- 注入凭证匹配器-->
-        <property name="credentialsMatcher" ref="credentialsMatcher" ></property>
+        <property name="credentialsMatcher" ref="credentialsMatcher"></property>
     </bean>
 
     <!--4. 创建shiro提供的凭证匹配器，自动对用户输入的密码按照指定的算法加密

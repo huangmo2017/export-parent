@@ -27,7 +27,7 @@ public class CargoDaoTest {
      * where id = ?
      */
     @Test
-    public void update(){
+    public void update() {
         Factory factory = new Factory();
         factory.setId("999"); // 此id在数据库不存在，这里重点是观察生成的sql
         factory.setCreateTime(new Date());
@@ -42,7 +42,7 @@ public class CargoDaoTest {
      * update co_factory SET state = ?, create_time = ?, update_time = ? where id = ?
      */
     @Test
-    public void dynamicSQL(){
+    public void dynamicSQL() {
         Factory factory = new Factory();
         factory.setId("999");
         factory.setCreateTime(new Date());
@@ -59,7 +59,7 @@ public class CargoDaoTest {
      * from co_factory WHERE ( factory_name = ? and address like ? )
      */
     @Test
-    public void findByExample(){
+    public void findByExample() {
         FactoryExample example = new FactoryExample();
         FactoryExample.Criteria criteria = example.createCriteria();
         criteria.andFactoryNameEqualTo("华艺");

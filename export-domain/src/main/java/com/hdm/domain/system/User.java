@@ -9,7 +9,7 @@ public class User {
     private String password;
     /**
      * 1启用0停用
-     */ 
+     */
     private Integer state;
     private String managerId;
     private String joinDate;
@@ -20,12 +20,12 @@ public class User {
     private String telephone;
     /**
      * 0作为内部控制，租户企业不能使用
-     *      0-saas管理员
-     *      1-企业管理员
-     *      2-管理所有下属部门和人员
-     *      3-管理本部门
-     *      4-普通员工
-     */ 
+     * 0-saas管理员
+     * 1-企业管理员
+     * 2-管理所有下属部门和人员
+     * 3-管理本部门
+     * 4-普通员工
+     */
     private Integer degree;
     private String remark;
     private Integer orderNo;
@@ -95,6 +95,7 @@ public class User {
     public void setManagerId(String managerId) {
         this.managerId = managerId;
     }
+
     public Double getSalary() {
         return salary;
     }
@@ -168,19 +169,19 @@ public class User {
         this.birthday = birthday;
     }
 
-   public String getCompanyId() {
-      return companyId;
-   }
+    public String getCompanyId() {
+        return companyId;
+    }
 
-   public void setCompanyId(String companyId) {
-      this.companyId = companyId;
-   }
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
 
-   public String getCompanyName() {
-      return companyName;
-   }
+    public String getCompanyName() {
+        return companyName;
+    }
 
-   public void setCompanyName(String companyName) {
-      this.companyName = companyName;
-   }
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 }

@@ -14,59 +14,59 @@ import java.util.UUID;
 @Service
 public class RoleServiceImpl implements RoleService {
 
-   @Autowired
-   private RoleDao roleDao;
+    @Autowired
+    private RoleDao roleDao;
 
-   public Role findById(String id) {
-      return roleDao.findById(id);
-   }
+    public Role findById(String id) {
+        return roleDao.findById(id);
+    }
 
-   //分页
-   public PageInfo<Role> findByPage(String companyId, int pageNum, int pageSize) {
-      PageHelper.startPage(pageNum,pageSize);
-      List<Role> list = roleDao.findAll(companyId);
-      return new PageInfo<Role>(list);
-   }
+    //分页
+    public PageInfo<Role> findByPage(String companyId, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Role> list = roleDao.findAll(companyId);
+        return new PageInfo<Role>(list);
+    }
 
-   public void delete(String id) {
-      roleDao.delete(id);
-   }
+    public void delete(String id) {
+        roleDao.delete(id);
+    }
 
-   public void save(Role role) {
-      //指定id属性
-      role.setId(UUID.randomUUID().toString());
-      roleDao.save(role);
-   }
+    public void save(Role role) {
+        //指定id属性
+        role.setId(UUID.randomUUID().toString());
+        roleDao.save(role);
+    }
 
-   public void update(Role role) {
-      roleDao.update(role);
-   }
+    public void update(Role role) {
+        roleDao.update(role);
+    }
 
-   @Override
-   public void updateRoleModule(String roleId, String moduleIds) {
-      //1. 先删除用户角色中间表数据
-      roleDao.deleteRoleModule(roleId);
+    @Override
+    public void updateRoleModule(String roleId, String moduleIds) {
+        //1. 先删除用户角色中间表数据
+        roleDao.deleteRoleModule(roleId);
 
-      //2. 判断
-      if (moduleIds != null){
-         //3. 分割字符串
-         String[] array = moduleIds.split(",");
-         if (array != null){
-            //4. 遍历所有模块，实现角色添加模块
-            for (String moduleId : array) {
-               roleDao.saveRoleModule(roleId,moduleId);
+        //2. 判断
+        if (moduleIds != null) {
+            //3. 分割字符串
+            String[] array = moduleIds.split(",");
+            if (array != null) {
+                //4. 遍历所有模块，实现角色添加模块
+                for (String moduleId : array) {
+                    roleDao.saveRoleModule(roleId, moduleId);
+                }
             }
-         }
-      }
-   }
+        }
+    }
 
-   @Override
-   public List<Role> findAll(String companyId) {
-      return roleDao.findAll(companyId);
-   }
+    @Override
+    public List<Role> findAll(String companyId) {
+        return roleDao.findAll(companyId);
+    }
 
-   @Override
-   public List<Role> findUserRole(String userId) {
-      return roleDao.findUserRole(userId);
-   }
+    @Override
+    public List<Role> findUserRole(String userId) {
+        return roleDao.findUserRole(userId);
+    }
 }

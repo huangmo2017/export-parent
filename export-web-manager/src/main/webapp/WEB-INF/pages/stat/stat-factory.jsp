@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="../base.jsp"%>
+<%@ include file="../base.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,22 +32,22 @@
     $.get('/stat/factoryCharts.do').done(function (data) {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption({
-            title : {
+            title: {
                 text: '厂家销售统计',
                 subtext: '',
-                x:'center'
+                x: 'center'
             },
-            tooltip : {
+            tooltip: {
                 trigger: 'item',
                 formatter: "{a} <br/>{b} : {c} ({d}%)"
             },
-            series : [
+            series: [
                 {
                     name: '访问来源',
                     type: 'pie',
-                    radius : '55%',
+                    radius: '55%',
                     center: ['50%', '60%'],
-                    data:data,
+                    data: data,
                     itemStyle: {
                         emphasis: {
                             shadowBlur: 10,

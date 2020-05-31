@@ -13,9 +13,10 @@ public interface ContractProductService {
 
     /**
      * 分页查询
+     *
      * @param ContractProductExample 分页查询的参数
-     * @param pageNum 当前页
-     * @param pageSize 页大小
+     * @param pageNum                当前页
+     * @param pageSize               页大小
      * @return
      */
     PageInfo<ContractProduct> findByPage(

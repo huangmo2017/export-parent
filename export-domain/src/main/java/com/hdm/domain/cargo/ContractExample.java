@@ -2043,7 +2043,7 @@ public class ContractExample implements Serializable {
      *
      * @mbg.generated do_not_delete_during_merge
      */
-    public static class Criteria extends GeneratedCriteria implements Serializable{
+    public static class Criteria extends GeneratedCriteria implements Serializable {
 
         protected Criteria() {
             super();
@@ -2056,7 +2056,7 @@ public class ContractExample implements Serializable {
      *
      * @mbg.generated
      */
-    public static class Criterion implements Serializable{
+    public static class Criterion implements Serializable {
         private String condition;
 
         private Object value;

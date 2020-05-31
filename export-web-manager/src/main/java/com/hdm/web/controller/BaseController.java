@@ -20,21 +20,21 @@ public class BaseController {
     /**
      * 获取当前登陆用户所属企业id
      */
-    public String getLoginCompanyId(){
+    public String getLoginCompanyId() {
         return getLoginUser().getCompanyId();
     }
 
     /**
      * 获取当前登陆用户所属企业名称
      */
-    public String getLoginCompanyName(){
+    public String getLoginCompanyName() {
         return getLoginUser().getCompanyName();
     }
 
     /**
      * 获取登陆用户对象
      */
-    public User getLoginUser(){
+    public User getLoginUser() {
         return (User) session.getAttribute("loginUser");
     }
 }

@@ -14,21 +14,21 @@ import java.util.UUID;
 @Service
 public class SysLogServiceImpl implements SysLogService {
 
-   @Autowired
-   private SysLogDao sysLogDao;
+    @Autowired
+    private SysLogDao sysLogDao;
 
-   public PageInfo<SysLog> findByPage(String companyId, int pageNum, int pageSize) {
-      //1.调用startPage方法
-      PageHelper.startPage(pageNum,pageSize);
-      //2.查询全部列表
-      List<SysLog> list = sysLogDao.findAll(companyId);
-      //3. 构造pagebean
-      return new PageInfo(list);
-   }
+    public PageInfo<SysLog> findByPage(String companyId, int pageNum, int pageSize) {
+        //1.调用startPage方法
+        PageHelper.startPage(pageNum, pageSize);
+        //2.查询全部列表
+        List<SysLog> list = sysLogDao.findAll(companyId);
+        //3. 构造pagebean
+        return new PageInfo(list);
+    }
 
-   public void save(SysLog sysLog) {
-      sysLog.setId(UUID.randomUUID().toString());
-      sysLogDao.save(sysLog);
-   }
+    public void save(SysLog sysLog) {
+        sysLog.setId(UUID.randomUUID().toString());
+        sysLogDao.save(sysLog);
+    }
 
 }

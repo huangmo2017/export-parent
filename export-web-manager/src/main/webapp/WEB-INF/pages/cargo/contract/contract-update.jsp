@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ include file="../../base.jsp"%>
+<%@ include file="../../base.jsp" %>
 <!DOCTYPE html>
 <html>
 
@@ -43,12 +43,14 @@
                 <div class="row data-type" style="margin: 0px">
                     <div class="col-md-2 title">收购方</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="收购方" name="offeror" value="${contract.offeror}">
+                        <input type="text" class="form-control" placeholder="收购方" name="offeror"
+                               value="${contract.offeror}">
                     </div>
 
                     <div class="col-md-2 title">合同号</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="合同号" name="contractNo" value="${contract.contractNo}">
+                        <input type="text" class="form-control" placeholder="合同号" name="contractNo"
+                               value="${contract.contractNo}">
                     </div>
 
                     <div class="col-md-2 title">签单日期</div>
@@ -57,33 +59,39 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" placeholder="签单日期"  name="signingDate" class="form-control pull-right"
-                                   value="<fmt:formatDate value="${contract.signingDate}" pattern="yyyy-MM-dd"/>" id="signingDate">
+                            <input type="text" placeholder="签单日期" name="signingDate" class="form-control pull-right"
+                                   value="<fmt:formatDate value="${contract.signingDate}" pattern="yyyy-MM-dd"/>"
+                                   id="signingDate">
                         </div>
                     </div>
 
                     <div class="col-md-2 title">制单人</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="制单人" name="inputBy" value="${contract.inputBy}">
+                        <input type="text" class="form-control" placeholder="制单人" name="inputBy"
+                               value="${contract.inputBy}">
                     </div>
 
                     <div class="col-md-2 title">审单人</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="审单人" name="checkBy" value="${contract.checkBy}">
+                        <input type="text" class="form-control" placeholder="审单人" name="checkBy"
+                               value="${contract.checkBy}">
                     </div>
 
                     <div class="col-md-2 title">验货员</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="验货员" name="inspector" value="${contract.inspector}">
+                        <input type="text" class="form-control" placeholder="验货员" name="inspector"
+                               value="${contract.inspector}">
                     </div>
 
                     <div class="col-md-2 title">要求</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="要求" name="crequest" value="${contract.crequest}">
+                        <input type="text" class="form-control" placeholder="要求" name="crequest"
+                               value="${contract.crequest}">
                     </div>
                     <div class="col-md-2 title">客户名称</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="客户名称" name="customName" value="${contract.customName}">
+                        <input type="text" class="form-control" placeholder="客户名称" name="customName"
+                               value="${contract.customName}">
                     </div>
 
                     <div class="col-md-2 title">船期</div>
@@ -92,17 +100,21 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" placeholder="船期"  name="shipTime" class="form-control pull-right"
-                                   value="<fmt:formatDate value="${contract.shipTime}" pattern="yyyy-MM-dd"/>" id="shipTime">
+                            <input type="text" placeholder="船期" name="shipTime" class="form-control pull-right"
+                                   value="<fmt:formatDate value="${contract.shipTime}" pattern="yyyy-MM-dd"/>"
+                                   id="shipTime">
                         </div>
                     </div>
 
                     <div class="col-md-2 title">重要程度</div>
                     <div class="col-md-4 data">
                         <div class="form-group form-inline">
-                            <div class="radio"><label><input type="radio" ${contract.importNum==3?'checked':''} name="importNum" value="3">★★★</label></div>
-                            <div class="radio"><label><input type="radio" ${contract.importNum==2?'checked':''} name="importNum" value="2">★★</label></div>
-                            <div class="radio"><label><input type="radio" ${contract.importNum==1?'checked':''} name="importNum" value="1">★</label></div>
+                            <div class="radio"><label><input type="radio" ${contract.importNum==3?'checked':''}
+                                                             name="importNum" value="3">★★★</label></div>
+                            <div class="radio"><label><input type="radio" ${contract.importNum==2?'checked':''}
+                                                             name="importNum" value="2">★★</label></div>
+                            <div class="radio"><label><input type="radio" ${contract.importNum==1?'checked':''}
+                                                             name="importNum" value="1">★</label></div>
                         </div>
                     </div>
 
@@ -112,36 +124,41 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" placeholder="交货期限"  name="deliveryPeriod" class="form-control pull-right"
-                                   value="<fmt:formatDate value="${contract.deliveryPeriod}" pattern="yyyy-MM-dd"/>" id="deliveryPeriod">
+                            <input type="text" placeholder="交货期限" name="deliveryPeriod" class="form-control pull-right"
+                                   value="<fmt:formatDate value="${contract.deliveryPeriod}" pattern="yyyy-MM-dd"/>"
+                                   id="deliveryPeriod">
                         </div>
                     </div>
 
                     <div class="col-md-2 title">贸易条款</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="贸易条款" name="tradeTerms" value="${contract.tradeTerms}">
+                        <input type="text" class="form-control" placeholder="贸易条款" name="tradeTerms"
+                               value="${contract.tradeTerms}">
                     </div>
 
                     <div class="col-md-2 title">打印版式</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="打印版式" name="printStyle" value="${contract.printStyle}">
+                        <input type="text" class="form-control" placeholder="打印版式" name="printStyle"
+                               value="${contract.printStyle}">
                     </div>
                     <div class="col-md-2 title">总金额</div>
                     <div class="col-md-4 data">
-                        <input type="text" disabled class="form-control" placeholder="0" name="totalAmount" value="${contract.totalAmount}">
+                        <input type="text" disabled class="form-control" placeholder="0" name="totalAmount"
+                               value="${contract.totalAmount}">
                     </div>
                     <div class="col-md-2 title rowHeight2x">备注</div>
                     <div class="col-md-10 data rowHeight2x">
                         <textarea class="form-control" rows="3" name="remark">${contract.remark}</textarea>
                     </div>
                 </div>
-          </form>
+            </form>
         </div>
         <!--订单信息/-->
 
         <!--工具栏-->
         <div class="box-tools text-center">
-            <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存</button>
+            <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存
+            </button>
             <button type="button" class="btn bg-default" onclick="history.back(-1);">返回</button>
         </div>
         <!--工具栏/-->

@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.hdm.domain.cargo.Contract;
 import com.hdm.domain.cargo.ContractExample;
+import com.hdm.domain.system.User;
 import com.hdm.service.cargo.ContractService;
 import com.hdm.web.controller.BaseController;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,41 @@ public class ContractController extends BaseController {
         // 根据创建时间降序查询
         example.setOrderByClause("create_time desc");
         // 构造条件 - 企业id
-        example.createCriteria().andCompanyIdEqualTo(getLoginCompanyId());
+        ContractExample.Criteria criteria = example.createCriteria();
+        criteria.andCompanyIdEqualTo(getLoginCompanyId());
+
+        /**
+         * 购销合同列表，要做细粒度权限控制。不同用户查看不同的列表数据
+         * 用户等级：
+         *      0-saas管理员
+         *      1-企业管理员
+         *      2-管理所有下属部门和人员
+         *      3-管理本部门
+         *      4-普通员工
+         */
+        //A. 获取登陆用户对象
+        User user = getLoginUser();
+        //B. 根据用户登陆判断
+        if (user.getDegree() == 4) {
+            //C. 普通用户。只能查看自己创建的购销合同。查询条件是：登陆用户id
+            // SQL: SELECT * FROM co_contract WHERE create_by='登陆用户id'
+            criteria.andCreateByEqualTo(user.getId());
+        } else if (user.getDegree() == 3) {
+            //D. 部门管理者，可以看到本部门员工创建的购销合同
+            //SELECT * FROM co_contract WHERE create_dept='登陆用户的部门id'
+            criteria.andCreateDeptEqualTo(user.getDeptId());
+        } else if (user.getDegree() == 2) {
+            //D. 管理本部门和下属部门。查看本部门以及下属子部门创建的购销合同。
+            //SELECT * FROM co_contract WHERE FIND_IN_SET('100',getDeptChild('100'))
+            //根据登陆用户的部门id查询本部门及子部门的员工创建的购销合同。
+            PageInfo<Contract> pageInfo =
+                    contractService.findByDeptId(user.getDeptId(), pageNum, pageSize);
+            // 返回
+            ModelAndView mv = new ModelAndView();
+            mv.addObject("pageInfo", pageInfo);
+            mv.setViewName("cargo/contract/contract-list");
+            return mv;
+        }
 
         // 分页查询
         PageInfo<Contract> pageInfo =
@@ -67,6 +102,9 @@ public class ContractController extends BaseController {
         contract.setCompanyName(getLoginCompanyName());
 
         if (StringUtils.isEmpty(contract.getId())) {
+            // 因为后期购销合同列表要做细粒度权限控制，根据用户等级显示不同的列表数据。所以这里要记录创建人所属部门。
+            contract.setCreateDept(getLoginUser().getDeptId());
+            contract.setCreateBy(getLoginUser().getId());
             // 添加
             contractService.save(contract);
         } else {

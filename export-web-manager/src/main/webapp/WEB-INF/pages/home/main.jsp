@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
-<%@ include file="../base.jsp"%>
+<%@ include file="../base.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,7 @@
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
 </head>
 
-<body class="hold-transition skin-purple sidebar-mini" >
+<body class="hold-transition skin-purple sidebar-mini">
 <div class="wrapper">
     <!-- 页面头部 -->
     <jsp:include page="header.jsp"></jsp:include>
@@ -84,12 +84,12 @@
     function setIframeHeight(iframe) {
         if (iframe) {
             var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
-            var height = iframeWin.document.getElementById('frameContent').scrollHeight +20 ;
-            iframe.height =height;
+            var height = iframeWin.document.getElementById('frameContent').scrollHeight + 20;
+            iframe.height = height;
         }
     };
 
-    var iframe= document.getElementById("iframe");
+    var iframe = document.getElementById("iframe");
     iframe.onload = function () {
         setIframeHeight(iframe);
     };

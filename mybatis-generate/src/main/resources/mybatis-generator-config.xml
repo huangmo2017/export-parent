@@ -27,7 +27,8 @@
         </javaTypeResolver>
 
         <!--指定包名生成实体类 以及生成的地址 （可以自定义地址，如果路径不存在会自动创建） -->
-        <javaModelGenerator targetPackage="com.hdm.domain.cargo" targetProject="I:\IdeaProjects\export-parent\mybatis-generate\src\main\java">
+        <javaModelGenerator targetPackage="com.hdm.domain.cargo"
+                            targetProject="I:\IdeaProjects\export-parent\mybatis-generate\src\main\java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false"/>
             <!-- 从数据库返回的值被清理前后的空格 -->
@@ -35,7 +36,8 @@
         </javaModelGenerator>
 
         <!--Mapper映射文件生成所在的目录 为每一个数据库的表生成对应的mapper文件 -->
-        <sqlMapGenerator targetPackage="com.hdm.dao.cargo" targetProject="I:\IdeaProjects\export-parent\mybatis-generate\src\main\resources">
+        <sqlMapGenerator targetPackage="com.hdm.dao.cargo"
+                         targetProject="I:\IdeaProjects\export-parent\mybatis-generate\src\main\resources">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
@@ -46,7 +48,8 @@
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
         <javaClientGenerator targetPackage="com.hdm.dao.cargo"
-                             targetProject="I:\IdeaProjects\export-parent\mybatis-generate\src\main\java" type="XMLMAPPER">
+                             targetProject="I:\IdeaProjects\export-parent\mybatis-generate\src\main\java"
+                             type="XMLMAPPER">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>

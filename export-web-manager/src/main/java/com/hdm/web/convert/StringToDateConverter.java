@@ -10,12 +10,12 @@ import java.util.Date;
 /**
  * 自定义类型转换器,实现接口：Converter<请求数据的类型（固定）,要转换的目标对象>
  */
-public class StringToDateConverter implements Converter<String,Date> {
+public class StringToDateConverter implements Converter<String, Date> {
     @Override
     public Date convert(String source) {
         try {
             // 判断:import org.springframework.util.StringUtils;
-            if (StringUtils.isEmpty(source)){
+            if (StringUtils.isEmpty(source)) {
                 return null;
             }
             // 转换

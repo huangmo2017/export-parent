@@ -21,7 +21,7 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public PageInfo<Contract> findByPage(ContractExample contractExample, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         List<Contract> list = contractDao.selectByExample(contractExample);
         PageInfo<Contract> pageInfo = new PageInfo<>(list);
         return pageInfo;
@@ -61,5 +61,11 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public void delete(String id) {
         contractDao.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public PageInfo<Contract> findByDeptId(String deptId, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return new PageInfo<>(contractDao.findByDeptId(deptId));
     }
 }

@@ -30,7 +30,7 @@
 
     <!--根据id查询-->
     <select id="findById" resultMap="BaseResultMap">
-        select  * from pe_user where user_id = #{id}
+        select * from pe_user where user_id = #{id}
     </select>
 
     <!--根据id删除-->

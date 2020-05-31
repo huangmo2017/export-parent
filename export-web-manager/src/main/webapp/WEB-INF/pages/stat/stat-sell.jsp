@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="../base.jsp"%>
+<%@ include file="../base.jsp" %>
 <!DOCTYPE html>
 <html>
 
@@ -49,7 +49,7 @@
                     type: 'category',
                     data: data.title,
                     axisLabel: {
-                        rotate:70
+                        rotate: 70
                     }
                 },
                 yAxis: {

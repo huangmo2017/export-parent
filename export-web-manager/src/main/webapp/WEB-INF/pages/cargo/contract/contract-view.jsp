@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ include file="../../base.jsp"%>
+<%@ include file="../../base.jsp" %>
 <!DOCTYPE html>
 <html>
 
@@ -60,7 +60,7 @@
 
                     <div class="col-md-2 title">制单人</div>
                     <div class="col-md-4 data" style="line-height:34px">
-                       ${contract.inputBy}
+                        ${contract.inputBy}
                     </div>
 
                     <div class="col-md-2 title">审单人</div>
@@ -119,13 +119,14 @@
                         ${contract.remark}
                     </div>
                 </div>
-          </form>
+            </form>
         </div>
         <!--订单信息/-->
 
         <!--工具栏-->
         <div class="box-tools text-center">
-            <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存</button>
+            <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存
+            </button>
             <button type="button" class="btn bg-default" onclick="history.back(-1);">返回</button>
         </div>
         <!--工具栏/-->

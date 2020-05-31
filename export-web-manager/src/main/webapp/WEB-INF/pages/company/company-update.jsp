@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="../base.jsp"%>
+<%@ include file="../base.jsp" %>
 <!DOCTYPE html>
 <html>
 
@@ -47,7 +47,8 @@
 
                     <div class="col-md-2 title">营业执照</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="营业执照" name="licenseId" value="${company.licenseId}">
+                        <input type="text" class="form-control" placeholder="营业执照" name="licenseId"
+                               value="${company.licenseId}">
                     </div>
 
                     <div class="col-md-2 title">所在城市</div>
@@ -57,27 +58,32 @@
 
                     <div class="col-md-2 title">企业地址</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="企业地址" name="address" value="${company.address}">
+                        <input type="text" class="form-control" placeholder="企业地址" name="address"
+                               value="${company.address}">
                     </div>
 
                     <div class="col-md-2 title">法人代表</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="法人代表" name="representative" value="${company.representative}">
+                        <input type="text" class="form-control" placeholder="法人代表" name="representative"
+                               value="${company.representative}">
                     </div>
 
                     <div class="col-md-2 title">联系电话</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="联系电话" name="phone" value="${company.phone}">
+                        <input type="text" class="form-control" placeholder="联系电话" name="phone"
+                               value="${company.phone}">
                     </div>
 
                     <div class="col-md-2 title">公司规模</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="公司规模" name="companySize" value="${company.companySize}">
+                        <input type="text" class="form-control" placeholder="公司规模" name="companySize"
+                               value="${company.companySize}">
                     </div>
 
                     <div class="col-md-2 title">所属行业</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="所属行业" name="industry" value="${company.industry}">
+                        <input type="text" class="form-control" placeholder="所属行业" name="industry"
+                               value="${company.industry}">
                     </div>
                     <div class="col-md-2 title">状态</div>
                     <div class="col-md-4 data">
@@ -90,7 +96,8 @@
 
                     <div class="col-md-2 title">余额</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="余额" name="balance" value="${company.balance}">
+                        <input type="text" class="form-control" placeholder="余额" name="balance"
+                               value="${company.balance}">
                     </div>
 
                     <div class="col-md-2 title rowHeight2x">备注</div>
@@ -104,7 +111,8 @@
 
         <!--工具栏-->
         <div class="box-tools text-center">
-            <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存</button>
+            <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存
+            </button>
             <button type="button" class="btn bg-default" onclick="history.back(-1);">返回</button>
         </div>
         <!--工具栏/-->

@@ -3,14 +3,14 @@
 <mapper namespace="com.hdm.dao.system.SysLogDao">
 
     <resultMap id="BaseResultMap" type="com.hdm.domain.system.SysLog">
-        <id column="id" property="id" />
-        <result column="user_name" property="userName" />
-        <result column="ip" property="ip" />
-        <result column="time" property="time" />
-        <result column="method" property="method" />
-        <result column="action" property="action" />
-        <result column="company_id" property="companyId" />
-        <result column="company_name" property="companyName" />
+        <id column="id" property="id"/>
+        <result column="user_name" property="userName"/>
+        <result column="ip" property="ip"/>
+        <result column="time" property="time"/>
+        <result column="method" property="method"/>
+        <result column="action" property="action"/>
+        <result column="company_id" property="companyId"/>
+        <result column="company_name" property="companyName"/>
     </resultMap>
 
     <!--查询全部-->

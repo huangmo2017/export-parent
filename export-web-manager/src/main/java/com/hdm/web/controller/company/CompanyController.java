@@ -40,20 +40,20 @@ public class CompanyController {
      * 运行结果： HTTP Status 400 – Bad Request
      * 问题分析： SpringMVC不能把String--->Date
      * 如何解决：
-     *          1. 写一个转换器类，实现Converter接口
-     *          2. 配置springmvc.xml, 告诉springmvc我们自定义的转换器类。
-     *             ConversionServiceFactoryBean
+     * 1. 写一个转换器类，实现Converter接口
+     * 2. 配置springmvc.xml, 告诉springmvc我们自定义的转换器类。
+     * ConversionServiceFactoryBean
      */
-    @RequestMapping(value = "/save",name = "保存测试")
-    public String save(Date birth){
-        int i = 1/0;
+    @RequestMapping(value = "/save", name = "保存测试")
+    public String save(Date birth) {
+        int i = 1 / 0;
         System.out.println(birth);
         return "success";
     }
 
 
     @RequestMapping(value = "/toAdd")
-    public String toAdd(){
+    public String toAdd() {
         return "company/company-add";
     }
 
@@ -64,13 +64,12 @@ public class CompanyController {
      * 响应地址：（重定向到列表）
      */
     @RequestMapping("/edit.do")
-    public String edit(Company company){
+    public String edit(Company company) {
         //4.1 根据id判断，如果id为NULL说明式是添加；否则为修改
-        if (StringUtils.isEmpty(company.getId())){
+        if (StringUtils.isEmpty(company.getId())) {
             // 添加
             companyService.save(company);
-        }
-        else {
+        } else {
             // 修改
             companyService.update(company);
         }
@@ -84,13 +83,13 @@ public class CompanyController {
      * 响应地址：/WEB-INF/pages/company/company-update.jsp  回显数据
      */
     @RequestMapping("/toUpdate")
-    public ModelAndView toUpdate(String id){
+    public ModelAndView toUpdate(String id) {
         //5.1 根据id查询企业
         Company company = companyService.findById(id);
         //5.2 返回
         ModelAndView mv = new ModelAndView();
         //a. 存储数据到request域
-        mv.addObject("company",company);//request.setAttribute(key,value);
+        mv.addObject("company", company);//request.setAttribute(key,value);
         //b. 设置跳转的页面地址
         mv.setViewName("company/company-update");
         return mv;
@@ -103,7 +102,7 @@ public class CompanyController {
      * 响应地址：(重定向到列表)
      */
     @RequestMapping("/delete")
-    public String delete(String id){
+    public String delete(String id) {
         companyService.delete(id);
         return "redirect:/company/list.do";
     }

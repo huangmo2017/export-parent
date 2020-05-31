@@ -154,7 +154,7 @@ public class ExtCproductExample implements Serializable {
      *
      * @mbg.generated
      */
-    protected abstract static class GeneratedCriteria implements Serializable{
+    protected abstract static class GeneratedCriteria implements Serializable {
         protected List<Criterion> criteria;
 
         protected GeneratedCriteria() {
@@ -1212,7 +1212,7 @@ public class ExtCproductExample implements Serializable {
      *
      * @mbg.generated do_not_delete_during_merge
      */
-    public static class Criteria extends GeneratedCriteria implements Serializable{
+    public static class Criteria extends GeneratedCriteria implements Serializable {
 
         protected Criteria() {
             super();
@@ -1225,7 +1225,7 @@ public class ExtCproductExample implements Serializable {
      *
      * @mbg.generated
      */
-    public static class Criterion implements Serializable{
+    public static class Criterion implements Serializable {
         private String condition;
 
         private Object value;

@@ -33,14 +33,22 @@
     <!--5. 配置自定义异常处理类-->
     <bean class="com.hdm.web.exceptions.CustomExceptionResolver"/>
 
-    <!--开启AOP注解支持-->
+    <!--6. 开启AOP注解支持-->
     <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
-    <!--Dubbo配置-->
+    <!--7. Dubbo配置-->
     <!-- 当前应用名称，用于注册中心计算应用间依赖关系，注意：消费者和提供者应用名不要一样 -->
-    <dubbo:application name="export-web-manager" />
+    <dubbo:application name="export-web-manager"/>
     <!-- 连接服务注册中心zookeeper ip为zookeeper所在服务器的ip地址-->
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
     <!-- 扫描的方式暴露接口  -->
     <dubbo:annotation package="com.hdm.web"/>
+
+    <!--8. 加载七牛云配置文件-->
+    <context:property-placeholder location="classpath:properties/qiniu.properties"/>
+
+    <!--9. 文件上传解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10485760"/>
+    </bean>
 </beans>

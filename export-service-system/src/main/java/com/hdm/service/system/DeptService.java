@@ -8,7 +8,7 @@ import java.util.List;
 public interface DeptService {
 
     // 分页查询全部
-    PageInfo<Dept> findByPage(String companyId,int pageNum,int pageSize);
+    PageInfo<Dept> findByPage(String companyId, int pageNum, int pageSize);
 
     // 主键查询
     Dept findById(String id);

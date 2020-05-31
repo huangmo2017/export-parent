@@ -18,7 +18,7 @@
 
     <!--Dubbo配置-->
     <!-- 当前应用名称，用于注册中心计算应用间依赖关系，注意：消费者和提供者应用名不要一样 -->
-    <dubbo:application name="export-web-protal" />
+    <dubbo:application name="export-web-protal"/>
     <!-- 连接服务注册中心zookeeper ip为zookeeper所在服务器的ip地址-->
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
     <!-- 开启dubbo注解扫描(@Reference注解)-->

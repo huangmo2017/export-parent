@@ -48,7 +48,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public PageInfo<Company> findByPage(int pageNum, int pageSize) {
         // 开始分页, PageHelper组件会自动对其后的第一条查询查询分页
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         // 调用dao查询
         List<Company> list = companyDao.findAll();
         // 创建PageInfo对象封装分页结果，传入查询集合。会自动计算分页参数

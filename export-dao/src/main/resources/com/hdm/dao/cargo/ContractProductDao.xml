@@ -22,7 +22,7 @@
         <result column="company_id" jdbcType="VARCHAR" property="companyId"/>
         <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
         <collection property="extCproducts" column="id" ofType="com.hdm.domain.cargo.ExtCproduct"
-                    select="cn.itcast.dao.cargo.ExtCproductDao.findByProductId"></collection>
+                    select="com.hdm.dao.cargo.ExtCproductDao.findByProductId"></collection>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -49,7 +49,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -66,10 +67,10 @@
         <if test="distinct">
             distinct
         </if>
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from co_contract_product
         <if test="_parameter != null">
-            <include refid="Example_Where_Clause" />
+            <include refid="Example_Where_Clause"/>
         </if>
         <if test="orderByClause != null">
             order by ${orderByClause}
@@ -78,7 +79,9 @@
 
     <!--根据id查询-->
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/> from co_contract_product where id = #{id}
+        select
+        <include refid="Base_Column_List"/>
+        from co_contract_product where id = #{id}
     </select>
 
     <!--根据id删除-->
@@ -232,7 +235,7 @@
                 product_desc = #{productDesc,jdbcType=VARCHAR},
             </if>
             <if test="loadingRate != null">
-                 loading_rate = #{loadingRate,jdbcType=VARCHAR},
+                loading_rate = #{loadingRate,jdbcType=VARCHAR},
             </if>
             <if test="boxNum != null">
                 box_num = #{boxNum,jdbcType=DECIMAL},

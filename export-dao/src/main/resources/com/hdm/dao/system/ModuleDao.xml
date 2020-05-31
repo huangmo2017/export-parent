@@ -2,22 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hdm.dao.system.ModuleDao">
     <resultMap id="BaseResultMap" type="com.hdm.domain.system.Module">
-        <id column="module_id" property="id" />
-        <result column="parent_id" property="parentId" />
-        <result column="parent_name" property="parentName" />
-        <result column="name" property="name" />
-        <result column="layer_num" property="layerNum" />
-        <result column="is_leaf" property="isLeaf" />
-        <result column="ico" property="ico" />
-        <result column="cpermission" property="cpermission" />
-        <result column="curl" property="curl" />
-        <result column="ctype" property="ctype" />
-        <result column="state" property="state" />
-        <result column="belong" property="belong" />
-        <result column="cwhich" property="cwhich" />
-        <result column="quote_num" property="quoteNum" />
-        <result column="remark" property="remark" />
-        <result column="order_no"  property="orderNo" />
+        <id column="module_id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="parent_name" property="parentName"/>
+        <result column="name" property="name"/>
+        <result column="layer_num" property="layerNum"/>
+        <result column="is_leaf" property="isLeaf"/>
+        <result column="ico" property="ico"/>
+        <result column="cpermission" property="cpermission"/>
+        <result column="curl" property="curl"/>
+        <result column="ctype" property="ctype"/>
+        <result column="state" property="state"/>
+        <result column="belong" property="belong"/>
+        <result column="cwhich" property="cwhich"/>
+        <result column="quote_num" property="quoteNum"/>
+        <result column="remark" property="remark"/>
+        <result column="order_no" property="orderNo"/>
     </resultMap>
 
     <!--查询全部模块列表-->
@@ -68,7 +68,7 @@
 
     <!--根据角色id查询模块-->
     <select id="findModulesByRoleId" resultMap="BaseResultMap">
-        SELECT m.* FROM pe_role_module rm, ss_module m WHERE  rm.module_id = m.module_id
+        SELECT m.* FROM pe_role_module rm, ss_module m WHERE rm.module_id = m.module_id
         AND role_id=#{roleId}
     </select>
 

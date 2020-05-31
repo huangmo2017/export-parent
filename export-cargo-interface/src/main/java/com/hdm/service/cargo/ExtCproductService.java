@@ -24,6 +24,7 @@ public interface ExtCproductService {
 
     /**
      * 根据id查询
+     *
      * @param id
      * @return
      */

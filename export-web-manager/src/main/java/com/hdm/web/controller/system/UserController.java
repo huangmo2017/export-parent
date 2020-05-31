@@ -102,18 +102,19 @@ public class UserController extends BaseController {
 
     /**
      * 删除，异步请求返回结果给客户端浏览器
+     *
      * @param id
      * @return
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public Map<String,Object> delete(String id){
-        Map<String,Object> map = new HashMap<>();
+    public Map<String, Object> delete(String id) {
+        Map<String, Object> map = new HashMap<>();
         boolean flag = userService.delete(id);
-        if (flag){
-            map.put("message","删除成功！");
+        if (flag) {
+            map.put("message", "删除成功！");
         } else {
-            map.put("message","当前删除的记录被外键引用，删除失败！");
+            map.put("message", "当前删除的记录被外键引用，删除失败！");
         }
         return map;
     }
@@ -134,13 +135,13 @@ public class UserController extends BaseController {
         //保存角色字符串，如："1,2,3"
         String userRoleStr = "";
         for (Role userRole : userRoles) {
-            userRoleStr += userRole.getId()+",";
+            userRoleStr += userRole.getId() + ",";
         }
 
         //4. 保存数据
-        request.setAttribute("user",user);
-        request.setAttribute("roleList",roleList);
-        request.setAttribute("userRoleStr",userRoleStr);
+        request.setAttribute("user", user);
+        request.setAttribute("roleList", roleList);
+        request.setAttribute("userRoleStr", userRoleStr);
 
         //5.跳转页面
         return "system/user/user-role";
@@ -150,9 +151,9 @@ public class UserController extends BaseController {
      * 6. 用户分配角色（2）保存用户角色
      */
     @RequestMapping("/changeRole")
-    public String changeRole(String userId,String[] roleIds){
+    public String changeRole(String userId, String[] roleIds) {
         // 给用户分配角色
-        userService.changeRole(userId,roleIds);
+        userService.changeRole(userId, roleIds);
         return "redirect:/system/user/list.do";
     }
 }

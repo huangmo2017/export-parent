@@ -24,6 +24,7 @@ public interface FactoryService {
 
     /**
      * 根据id查询
+     *
      * @param id
      * @return
      */

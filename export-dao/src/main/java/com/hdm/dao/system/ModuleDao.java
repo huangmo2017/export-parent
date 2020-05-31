@@ -25,7 +25,7 @@ public interface ModuleDao {
     List<Module> findModulesByRoleId(String roleId);
 
     // 根据belong查询权限
-    List<Module> findModulesByBelong(String  belong);
+    List<Module> findModulesByBelong(String belong);
 
     // 根据用户查询权限。
     List<Module> findModulesByUserId(String id);

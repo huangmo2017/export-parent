@@ -17,18 +17,21 @@ public interface CompanyService {
 
     /**
      * 添加
+     *
      * @param company
      */
     void save(Company company);
 
     /**
      * 修改
+     *
      * @param company
      */
     void update(Company company);
 
     /**
      * 主键查询
+     *
      * @param id 主键
      * @return 返回用户对象
      */
@@ -36,12 +39,14 @@ public interface CompanyService {
 
     /**
      * 删除
+     *
      * @param id
      */
     void delete(String id);
 
     /**
      * 分页查询
+     *
      * @param pageNum
      * @param pageSize
      * @return

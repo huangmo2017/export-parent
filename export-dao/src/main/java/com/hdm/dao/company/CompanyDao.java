@@ -19,18 +19,21 @@ public interface CompanyDao {
 
     /**
      * 添加
+     *
      * @param company
      */
     void save(Company company);
 
     /**
      * 修改
+     *
      * @param company
      */
     void update(Company company);
 
     /**
      * 主键查询
+     *
      * @param id
      * @return
      */
@@ -38,6 +41,7 @@ public interface CompanyDao {
 
     /**
      * 删除
+     *
      * @param id
      */
     void delete(String id);

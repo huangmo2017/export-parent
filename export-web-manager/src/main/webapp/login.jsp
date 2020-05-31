@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page contentType="text/html; charset=utf-8" %>
 <!DOCTYPE html>
 <html>
 
@@ -61,7 +61,7 @@
 <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="../plugins/iCheck/icheck.min.js"></script>
 <script>
-    $(function() {
+    $(function () {
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',

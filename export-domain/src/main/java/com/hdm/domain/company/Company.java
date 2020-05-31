@@ -9,7 +9,7 @@ import java.util.Date;
  * @author: huangdaming
  * @Date: 2020-05-27 23:13
  */
-public class Company implements Serializable{
+public class Company implements Serializable {
     /**
      * 对象唯一标记，对应数据库主键
      */

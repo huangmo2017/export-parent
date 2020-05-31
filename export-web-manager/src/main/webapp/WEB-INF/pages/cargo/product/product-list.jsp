@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ include file="../../base.jsp"%>
+<%@ include file="../../base.jsp" %>
 <!DOCTYPE html>
 <html>
 
@@ -39,13 +39,15 @@
         <!--订单信息-->
         <div class="panel panel-default">
             <div class="panel-heading">新增货物</div>
-            <form id="editForm" action="${ctx}/cargo/contractProduct/edit.do" method="post" enctype="multipart/form-data">
+            <form id="editForm" action="${ctx}/cargo/contractProduct/edit.do" method="post"
+                  enctype="multipart/form-data">
                 <input type="hidden" name="contractId" value="${contractId}">
                 <input type="hidden" name="factoryName" id="factoryName" value="${contractProduct.factoryName}">
                 <div class="row data-type" style="margin: 0px">
                     <div class="col-md-2 title">生产厂家</div>
                     <div class="col-md-4 data">
-                        <select class="form-control"  name="factoryId" id="factoryInfo" onchange="document.getElementById('factoryName').value=this.options[this.selectedIndex].text">
+                        <select class="form-control" name="factoryId" id="factoryInfo"
+                                onchange="document.getElementById('factoryName').value=this.options[this.selectedIndex].text">
                             <option value="">请选择</option>
                             <c:forEach items="${factoryList}" var="factory">
                                 <option value="${factory.id}">${factory.factoryName}</option>
@@ -55,53 +57,65 @@
 
                     <div class="col-md-2 title">货号</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="货号" name="productNo" value="${contractProduct.productNo}">
+                        <input type="text" class="form-control" placeholder="货号" name="productNo"
+                               value="${contractProduct.productNo}">
                     </div>
 
                     <div class="col-md-2 title">货物照片</div>
                     <div class="col-md-4 data">
-                        <input type="file" class="form-control" placeholder="请选择" name="productPhoto" >
+                        <input type="file" class="form-control" placeholder="请选择" name="productPhoto">
                     </div>
 
                     <div class="col-md-2 title">数量</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="数量" name="cnumber" value="${contractProduct.cnumber}">
+                        <input type="text" class="form-control" placeholder="数量" name="cnumber"
+                               value="${contractProduct.cnumber}">
                     </div>
 
                     <div class="col-md-2 title">包装单位</div>
                     <div class="col-md-4 data">
                         <div class="form-group form-inline">
-                            <div class="radio"><label><input type="radio" ${contractProduct.packingUnit=="PCS"?'checked':''} name="packingUnit" value="PCS">PCS</label></div>
-                            <div class="radio"><label><input type="radio" ${contractProduct.packingUnit=="SETS"?'checked':''} name="packingUnit" value="SETS">SETS</label></div>
+                            <div class="radio"><label><input
+                                    type="radio" ${contractProduct.packingUnit=="PCS"?'checked':''} name="packingUnit"
+                                    value="PCS">PCS</label></div>
+                            <div class="radio"><label><input
+                                    type="radio" ${contractProduct.packingUnit=="SETS"?'checked':''} name="packingUnit"
+                                    value="SETS">SETS</label></div>
                         </div>
                     </div>
 
                     <div class="col-md-2 title">装率</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="装率" name="loadingRate" value="${contractProduct.loadingRate}">
+                        <input type="text" class="form-control" placeholder="装率" name="loadingRate"
+                               value="${contractProduct.loadingRate}">
                     </div>
 
                     <div class="col-md-2 title">箱数</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="箱数" name="boxNum" value="${contractProduct.boxNum}">
+                        <input type="text" class="form-control" placeholder="箱数" name="boxNum"
+                               value="${contractProduct.boxNum}">
                     </div>
 
                     <div class="col-md-2 title">单价</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="单价" name="price" value="${contractProduct.price}">
+                        <input type="text" class="form-control" placeholder="单价" name="price"
+                               value="${contractProduct.price}">
                     </div>
                     <div class="col-md-2 title">排序号</div>
                     <div class="col-md-10 data">
-                        <input type="text" class="form-control" placeholder="排序号" name="orderNo" value="${contractProduct.orderNo}">
+                        <input type="text" class="form-control" placeholder="排序号" name="orderNo"
+                               value="${contractProduct.orderNo}">
                     </div>
                     <div class="col-md-2 title rowHeight2x">货物描述</div>
                     <div class="col-md-4 data  rowHeight2x">
-                        <textarea class="form-control" rows="3" placeholder="货物描述" name="productDesc">${contractProduct.productDesc}</textarea>
+                        <textarea class="form-control" rows="3" placeholder="货物描述"
+                                  name="productDesc">${contractProduct.productDesc}</textarea>
                     </div>
 
                     <div class="col-md-2 title rowHeight2x">要求</div>
                     <div class="col-md-4 data  rowHeight2x">
-                        <textarea class="form-control" rows="3" placeholder="要求" name="productRequest">${contractProduct.productRequest}</textarea>
+                        <textarea class="form-control" rows="3" placeholder="要求"
+                                  name="productRequest">${contractProduct.productRequest}</textarea>
                     </div>
                 </div>
             </form>
@@ -110,7 +124,8 @@
 
         <!--工具栏-->
         <div class="box-tools text-center">
-            <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存</button>
+            <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存
+            </button>
             <button type="button" class="btn bg-default" onclick="history.back(-1);">返回</button>
         </div>
         <!--工具栏/-->
@@ -134,7 +149,8 @@
                     <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
                         <thead>
                         <tr>
-                            <td class="tableHeader"><input type="checkbox" name="selid" onclick="checkAll('id',this)"></td>
+                            <td class="tableHeader"><input type="checkbox" name="selid" onclick="checkAll('id',this)">
+                            </td>
                             <td class="tableHeader">序号</td>
                             <td class="tableHeader">厂家</td>
                             <td class="tableHeader">货号</td>
@@ -147,10 +163,10 @@
                             <td class="tableHeader">操作</td>
                         </tr>
                         </thead>
-                        <tbody class="tableBody" >
+                        <tbody class="tableBody">
                         ${links }
-                        <c:forEach items="${page.rows}" var="o" varStatus="status">
-                            <tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'" >
+                        <c:forEach items="${pageInfo.list}" var="o" varStatus="status">
+                            <tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'">
                                 <td><input type="checkbox" name="id" value="${o.id}"/></td>
                                 <td>${status.index+1}</td>
                                 <td>${o.factoryName}</td>
@@ -169,7 +185,8 @@
                             </tr>
 
                             <c:forEach items="${o.extCproducts}" var="ext" varStatus="status">
-                                <tr height="40" class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'" >
+                                <tr height="40" class="odd" onmouseover="this.className='highlight'"
+                                    onmouseout="this.className='odd'">
                                     <td>&nbsp;</td>
                                     <td align="right"><font color="blue">附件：${status.index+1}&nbsp;</font></td>
                                     <td>${ext.factoryName}</td>

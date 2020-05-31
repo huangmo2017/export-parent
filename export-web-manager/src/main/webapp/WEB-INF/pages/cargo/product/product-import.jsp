@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ include file="../../base.jsp"%>
+<%@ include file="../../base.jsp" %>
 <!DOCTYPE html>
 <html>
 
@@ -44,7 +44,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">导入货物</div>
             <form id="editForm" action="/cargo/contractProduct/import.do" method="post" enctype="multipart/form-data">
-                <input type="text"  name="contractId" value="${contractId}">
+                <input type="text" name="contractId" value="${contractId}">
                 <div class="row data-type" style="margin: 0px">
                     <div class="col-md-2 title">选择文件</div>
                     <div class="col-md-4 data">
@@ -59,7 +59,8 @@
 
         <!--工具栏-->
         <div class="box-tools text-center">
-            <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存</button>
+            <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存
+            </button>
             <button type="button" class="btn bg-default" onclick="history.back(-1);">返回</button>
         </div>
         <!--工具栏/-->
