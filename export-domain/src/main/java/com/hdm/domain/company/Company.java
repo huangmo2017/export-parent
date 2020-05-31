@@ -1,5 +1,6 @@
 package com.hdm.domain.company;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  * @author: huangdaming
  * @Date: 2020-05-27 23:13
  */
-public class Company {
+public class Company implements Serializable{
     /**
      * 对象唯一标记，对应数据库主键
      */

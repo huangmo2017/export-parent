@@ -13,6 +13,9 @@
         <module>export-dao</module>
         <module>export-service-system</module>
         <module>export-web-manager</module>
+        <module>export-company-interface</module>
+        <module>export-company-service</module>
+        <module>export-web-portal</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->
