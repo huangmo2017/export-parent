@@ -16,6 +16,9 @@
         <module>export-company-interface</module>
         <module>export-company-service</module>
         <module>export-web-portal</module>
+        <module>mybatis-generate</module>
+        <module>export-cargo-interface</module>
+        <module>export-cargo-service</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->

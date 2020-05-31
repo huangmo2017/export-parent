@@ -1,5 +1,6 @@
 package com.hdm.web.controller.company;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.hdm.domain.company.Company;
 import com.hdm.service.company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import java.util.List;
 @RequestMapping(value = "/company")
 public class CompanyController {
 
-    @Autowired
+    @Reference
     private CompanyService companyService;
 
     @RequestMapping(value = "/list", name = "企业列表")
