@@ -6,6 +6,8 @@ import com.github.pagehelper.PageInfo;
 import com.hdm.dao.cargo.*;
 import com.hdm.domain.cargo.*;
 import com.hdm.service.cargo.ExportService;
+import com.hdm.vo.ExportProductResult;
+import com.hdm.vo.ExportResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -135,5 +137,23 @@ public class ExportServiceImpl implements ExportService {
     @Override
     public void delete(String id) {
         exportDao.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void updateExport(ExportResult result) {
+        //1.查询报运单
+        Export export = exportDao.selectByPrimaryKey(result.getExportId());
+        //2.设置报运单属性（状态，和说明）
+        export.setState(result.getState());
+        export.setRemark(result.getRemark());
+        exportDao.updateByPrimaryKeySelective(export);
+
+        //3.循环处理报运商品
+        for (ExportProductResult epr : result.getProducts()) {
+            ExportProduct exportProduct = exportProductDao.selectByPrimaryKey(epr.getExportProductId());
+            //4.对报运商品的税收修改
+            exportProduct.setTax(epr.getTax());
+            exportProductDao.updateByPrimaryKeySelective(exportProduct);
+        }
     }
 }

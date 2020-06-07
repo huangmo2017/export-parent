@@ -6,12 +6,18 @@ import com.hdm.domain.cargo.*;
 import com.hdm.service.cargo.ContractService;
 import com.hdm.service.cargo.ExportProductService;
 import com.hdm.service.cargo.ExportService;
+import com.hdm.vo.ExportProductVo;
+import com.hdm.vo.ExportResult;
+import com.hdm.vo.ExportVo;
 import com.hdm.web.controller.BaseController;
+import org.apache.cxf.jaxrs.client.WebClient;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -113,6 +119,69 @@ public class ExportController extends BaseController {
       //4.2.3 保存报运商品
       request.setAttribute("eps",exportProductList);
       return "cargo/export/export-update";
+   }
+
+   /**
+    * 出口报运列表，点击取消
+    */
+   @RequestMapping("/cancel")
+   public String cancel(String id) {
+      Export export = exportService.findById(id);
+      export.setState(0);
+      exportService.update(export);
+      return "redirect:/cargo/export/list.do";
+   }
+
+   /**
+    * 出口报运列表，点击提交
+    */
+   @RequestMapping("/submit")
+   public String submit(String id) {
+      Export export = exportService.findById(id);
+      export.setState(1);
+      exportService.update(export);
+      return "redirect:/cargo/export/list.do";
+   }
+
+   /**
+    * 电子报运
+    * @param id
+    * @return
+    */
+   @RequestMapping("/exportE")
+   public String exportE(String id) {
+      //1.根据报运单id查询报运单对象
+      Export export = exportService.findById(id);
+      //2.根据报运单id查询报运商品列表
+      ExportProductExample example = new ExportProductExample();
+      ExportProductExample.Criteria criteria = example.createCriteria();
+      criteria.andExportIdEqualTo(id);
+      List<ExportProduct> eps = exportProductService.findAll(example);
+
+      //3.构造电子报运的VO对象，并赋值
+      ExportVo vo = new ExportVo();
+      BeanUtils.copyProperties(export,vo);
+      vo.setExportId(export.getId());
+      //构造报运商品数据
+      List<ExportProductVo> products = new ArrayList<ExportProductVo>();
+      for (ExportProduct ep : eps) {
+         ExportProductVo epv = new ExportProductVo();
+         BeanUtils.copyProperties(ep,epv);
+         epv.setExportProductId(ep.getId());
+         products.add(epv);
+      }
+      vo.setProducts(products);
+
+      //4.电子报运
+      WebClient client = WebClient.create("http://localhost:9091/ws/export/user");
+      client.post(vo);
+      //5.查询报运结果
+      client = WebClient.create("http://localhost:9091/ws/export/user/"+id);
+      ExportResult result = client.get(ExportResult.class);
+
+      //6.调用service完成报运结果的入库
+      exportService.updateExport(result);
+      return "redirect:/cargo/export/list.do";
    }
 
 }

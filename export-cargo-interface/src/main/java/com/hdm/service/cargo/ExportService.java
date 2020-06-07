@@ -3,6 +3,7 @@ package com.hdm.service.cargo;
 import com.github.pagehelper.PageInfo;
 import com.hdm.domain.cargo.Export;
 import com.hdm.domain.cargo.ExportExample;
+import com.hdm.vo.ExportResult;
 
 public interface ExportService {
 
@@ -16,4 +17,6 @@ public interface ExportService {
 
     PageInfo<Export> findByPage(ExportExample example,
                                 int pageNum, int pageSize);
+
+    void updateExport(ExportResult result);
 }
