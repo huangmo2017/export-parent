@@ -120,74 +120,71 @@ public class ContractProductController extends BaseController {
     }
 
     /**
-     * 文件上传
-     * MultipartFile ： springmvc提供的文件对象
+     * 5. 上传货物（1）进入货物上传页面
+     * 请求地址：http://localhost:8080/cargo/contractProduct/toImport.do?contractId=1
+     */
+    @RequestMapping("/toImport")
+    public String toImport(String contractId){
+        request.setAttribute("contractId",contractId);
+        return "cargo/product/product-import";
+    }
+
+    /**
+     * 5. 上传货物（2）上传excel，导入excel数据到数据库
+     * 请求地址：/cargo/contractProduct/import.do
+     * 请求参数：
+     *     A. 普通参数：contractId
+     *     B. 页面文件域： <input type="file" name="file">
      */
     @RequestMapping("/import")
-    public String importExcel(MultipartFile file, String contractId) throws Exception {
-        //1.根据上传的excel文件创建工作簿
-        Workbook wb = new XSSFWorkbook(file.getInputStream());
-        //2.获取第一个sheet
-        Sheet sheet = wb.getSheetAt(0);
-        //3.循环获取每一个行对象
+    public String importExcel(String contractId,MultipartFile file) throws Exception {
+        //1. 创建工作簿
+        Workbook workbook = new XSSFWorkbook(file.getInputStream());
 
-        for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+        //2. 获取工作表
+        Sheet sheet = workbook.getSheetAt(0);
+
+        //3. 获取工作表的总行数
+        int totalRow = sheet.getPhysicalNumberOfRows();
+
+        //4. 遍历每一行，把读取的每一行封装为货物对象。最后保存货物。
+        //4.1 从第二行开始遍历
+        for (int i=1; i<totalRow; i++){
+            //4.2 获取每一行
             Row row = sheet.getRow(i);
-            //4.循环获取每一个单元格
-            Object objs[] = new Object[10];
-            for (int j = 0; j < row.getLastCellNum(); j++) {
-                Cell cell = row.getCell(j);
-                //5.获取单元格中的每一个数据
-                if (cell != null) {
-                    objs[j] = getCellValue(cell);
-                }
+            //4.3 创建货物对象
+            ContractProduct cp = new ContractProduct();
+            //4.4 读取单元格信息，封装到货物对象中。
+            // 生产厂家	货号	数量	包装单位(PCS/SETS)	装率	箱数	单价	货物描述	要求
+            cp.setFactoryName(row.getCell(1).getStringCellValue());
+            cp.setProductNo(row.getCell(2).getStringCellValue());
+            cp.setCnumber((int) row.getCell(3).getNumericCellValue());
+            cp.setPackingUnit(row.getCell(4).getStringCellValue());
+            cp.setLoadingRate(row.getCell(5).getNumericCellValue() + "");
+            cp.setBoxNum((int) row.getCell(6).getNumericCellValue());
+            cp.setPrice(row.getCell(7).getNumericCellValue());
+            cp.setProductDesc(row.getCell(8).getStringCellValue());
+            cp.setProductRequest(row.getCell(9).getStringCellValue());
+            //4.5 根据工厂名称查询获取并设置工厂id
+            FactoryExample factoryExample = new FactoryExample();
+            factoryExample.createCriteria().andFactoryNameEqualTo(cp.getFactoryName());
+            List<Factory> list = factoryService.findAll(factoryExample);
+            if (list != null && list.size()>0){
+                cp.setFactoryId(list.get(0).getId());
             }
-            //6.构造货物对象
-            ContractProduct cp = new ContractProduct(objs, getLoginCompanyId(), getLoginCompanyName());
-            //设置购销合同id
+            //4.6 设置货物所属企业
+            cp.setCompanyId(getLoginCompanyId());
+            cp.setCompanyName(getLoginCompanyName());
+            //4.8 设置购销合同id
             cp.setContractId(contractId);
 
-            // 调用service保存货物
+            //4.7 保存货物
             contractProductService.save(cp);
         }
 
-        return "redirect:/cargo/contractProduct/list.do?contractId=" + contractId;
-    }
-
-    public Object getCellValue(Cell cell) {
-        /**
-         * 获取单元格的类型
-         */
-        CellType type = cell.getCellType();
-
-        Object result = null;
-
-        switch (type) {
-            case STRING: {
-                result = cell.getStringCellValue();//获取string类型数据
-                break;
-            }
-            case NUMERIC: {
-                /**
-                 * 判断
-                 */
-                if (DateUtil.isCellDateFormatted(cell)) {  //日期格式
-                    result = cell.getDateCellValue();
-                } else {
-                    //double类型
-                    result = cell.getNumericCellValue(); //数字类型
-                }
-                break;
-            }
-            case BOOLEAN: {
-                result = cell.getBooleanCellValue();//获取boolean类型数据
-                break;
-            }
-            default: {
-                break;
-            }
-        }
-
-        return result;
+        // 上传成功，保存数据
+        request.setAttribute("contractId",contractId);
+        // 上传成功，回到当前页面
+        return "cargo/product/product-import";
     }
 }

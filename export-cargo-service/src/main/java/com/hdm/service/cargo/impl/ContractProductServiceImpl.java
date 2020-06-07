@@ -8,6 +8,7 @@ import com.hdm.dao.cargo.ContractProductDao;
 import com.hdm.dao.cargo.ExtCproductDao;
 import com.hdm.domain.cargo.*;
 import com.hdm.service.cargo.ContractProductService;
+import com.hdm.vo.ContractProductVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -115,5 +116,10 @@ public class ContractProductServiceImpl implements ContractProductService {
         contract.setExtNum(contract.getExtNum() - list.size());
         //8.更新购销合同
         contractDao.updateByPrimaryKeySelective(contract);
+    }
+
+    @Override
+    public List<ContractProductVo> findByShipTime(String shipTime, String companyId) {
+        return contractProductDao.findByShipTime(shipTime,companyId);
     }
 }

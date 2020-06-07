@@ -48,7 +48,7 @@ public class FileUploadUtil {
             fileName = uuid + "_" + fileName;
             //构造一个带指定Zone对象的配置类
             //指定上传文件服务器地址：
-            Configuration cfg = new Configuration(Zone.zone0());
+            Configuration cfg = new Configuration(Zone.zone2());
             //...其他参数参考类注释
             //上传管理器
             UploadManager uploadManager = new UploadManager(cfg);

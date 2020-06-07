@@ -121,7 +121,7 @@ public class ContractController extends BaseController {
     public String toUpdate(String id) {
         Contract contract = contractService.findById(id);
         request.setAttribute("contract", contract);
-        return "cargo/contract/contract-update";
+        return "cargSysLogDaoo/contract/contract-update";
     }
 
     /**

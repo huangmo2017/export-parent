@@ -3,6 +3,7 @@ package com.hdm.service.cargo;
 import com.github.pagehelper.PageInfo;
 import com.hdm.domain.cargo.ContractProduct;
 import com.hdm.domain.cargo.ContractProductExample;
+import com.hdm.vo.ContractProductVo;
 
 import java.util.List;
 
@@ -46,4 +47,12 @@ public interface ContractProductService {
      * 删除部门
      */
     void delete(String id);
+
+    /**
+     * 根据船期查询，导出出货表
+     * @param shipTime
+     * @param companyId
+     * @return
+     */
+    List<ContractProductVo> findByShipTime(String shipTime, String companyId);
 }

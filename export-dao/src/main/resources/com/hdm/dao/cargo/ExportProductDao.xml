@@ -1,35 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hdm.dao.cargo.ContractProductDao">
-    <resultMap id="BaseResultMap" type="com.hdm.domain.cargo.ContractProduct">
+<mapper namespace="com.hdm.dao.cargo.ExportProductDao">
+
+    <resultMap id="BaseResultMap" type="com.hdm.domain.cargo.ExportProduct">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="contract_id" jdbcType="VARCHAR" property="contractId"/>
+        <result column="export_id" jdbcType="VARCHAR" property="exportId"/>
         <result column="factory_id" jdbcType="VARCHAR" property="factoryId"/>
-        <result column="factory_name" jdbcType="VARCHAR" property="factoryName"/>
         <result column="product_no" jdbcType="VARCHAR" property="productNo"/>
-        <result column="product_image" jdbcType="VARCHAR" property="productImage"/>
-        <result column="product_desc" jdbcType="VARCHAR" property="productDesc"/>
-        <result column="loading_rate" jdbcType="VARCHAR" property="loadingRate"/>
-        <result column="box_num" jdbcType="DECIMAL" property="boxNum"/>
         <result column="packing_unit" jdbcType="VARCHAR" property="packingUnit"/>
         <result column="cnumber" jdbcType="DECIMAL" property="cnumber"/>
-        <result column="out_number" jdbcType="DECIMAL" property="outNumber"/>
-        <result column="finished" jdbcType="DECIMAL" property="finished"/>
-        <result column="product_request" jdbcType="VARCHAR" property="productRequest"/>
+        <result column="box_num" jdbcType="DECIMAL" property="boxNum"/>
+        <result column="gross_weight" jdbcType="DECIMAL" property="grossWeight"/>
+        <result column="net_weight" jdbcType="DECIMAL" property="netWeight"/>
+        <result column="size_length" jdbcType="DECIMAL" property="sizeLength"/>
+        <result column="size_width" jdbcType="DECIMAL" property="sizeWidth"/>
+        <result column="size_height" jdbcType="DECIMAL" property="sizeHeight"/>
+        <result column="ex_price" jdbcType="DECIMAL" property="exPrice"/>
         <result column="price" jdbcType="DECIMAL" property="price"/>
-        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="tax" jdbcType="DECIMAL" property="tax"/>
         <result column="order_no" jdbcType="DECIMAL" property="orderNo"/>
         <result column="company_id" jdbcType="VARCHAR" property="companyId"/>
         <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
-        <collection property="extCproducts" column="id" ofType="com.hdm.domain.cargo.ExtCproduct"
-                    select="com.hdm.dao.cargo.ExtCproductDao.findByProductId"></collection>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, contract_id, factory_id, factory_name, product_no, product_image,
-        product_desc, loading_rate, box_num, packing_unit, cnumber, out_number, finished,
-        product_request, price, amount, order_no, company_id, company_name
-    </sql>
+        id, export_id, factory_id, product_no, packing_unit, cnumber, box_num,
+        gross_weight, net_weight, size_length, size_width, size_height, ex_price, price,
+        tax, order_no, company_id, company_name
+     </sql>
 
     <sql id="Example_Where_Clause">
         <where>
@@ -49,8 +47,7 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -62,15 +59,16 @@
         </where>
     </sql>
 
-    <select id="selectByExample" parameterType="com.hdm.domain.cargo.ContractProductExample" resultMap="BaseResultMap">
+    <!--条件查询-->
+    <select id="selectByExample" parameterType="com.hdm.domain.cargo.ExportProductExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
-        <include refid="Base_Column_List"/>
-        from co_contract_product
+        <include refid="Base_Column_List" />
+        from co_export_product
         <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
+            <include refid="Example_Where_Clause" />
         </if>
         <if test="orderByClause != null">
             order by ${orderByClause}
@@ -79,46 +77,29 @@
 
     <!--根据id查询-->
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from co_contract_product where id = #{id}
+        select <include refid="Base_Column_List"/> from co_export_product  where id = #{id,jdbcType=VARCHAR}
     </select>
 
     <!--根据id删除-->
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from co_contract_product where id = #{id}
+        delete from co_export_product where id = #{id,jdbcType=VARCHAR}
     </delete>
 
     <!--保存-->
-    <insert id="insertSelective" parameterType="com.hdm.domain.cargo.ContractProduct">
-        insert into co_contract_product
+    <insert id="insertSelective" parameterType="com.hdm.domain.cargo.ExportProduct">
+        insert into co_export_product
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
             </if>
-            <if test="contractId != null">
-                contract_id,
+            <if test="exportId != null">
+                export_id,
             </if>
             <if test="factoryId != null">
                 factory_id,
             </if>
-            <if test="factoryName != null">
-                factory_name,
-            </if>
             <if test="productNo != null">
                 product_no,
-            </if>
-            <if test="productImage != null">
-                product_image,
-            </if>
-            <if test="productDesc != null">
-                product_desc,
-            </if>
-            <if test="loadingRate != null">
-                loading_rate,
-            </if>
-            <if test="boxNum != null">
-                box_num,
             </if>
             <if test="packingUnit != null">
                 packing_unit,
@@ -126,20 +107,32 @@
             <if test="cnumber != null">
                 cnumber,
             </if>
-            <if test="outNumber != null">
-                out_number,
+            <if test="boxNum != null">
+                box_num,
             </if>
-            <if test="finished != null">
-                finished,
+            <if test="grossWeight != null">
+                gross_weight,
             </if>
-            <if test="productRequest != null">
-                product_request,
+            <if test="netWeight != null">
+                net_weight,
+            </if>
+            <if test="sizeLength != null">
+                size_length,
+            </if>
+            <if test="sizeWidth != null">
+                size_width,
+            </if>
+            <if test="sizeHeight != null">
+                size_height,
+            </if>
+            <if test="exPrice != null">
+                ex_price,
             </if>
             <if test="price != null">
                 price,
             </if>
-            <if test="amount != null">
-                amount,
+            <if test="tax != null">
+                tax,
             </if>
             <if test="orderNo != null">
                 order_no,
@@ -155,29 +148,14 @@
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test="contractId != null">
-                #{contractId,jdbcType=VARCHAR},
+            <if test="exportId != null">
+                #{exportId,jdbcType=VARCHAR},
             </if>
             <if test="factoryId != null">
                 #{factoryId,jdbcType=VARCHAR},
             </if>
-            <if test="factoryName != null">
-                #{factoryName,jdbcType=VARCHAR},
-            </if>
             <if test="productNo != null">
                 #{productNo,jdbcType=VARCHAR},
-            </if>
-            <if test="productImage != null">
-                #{productImage,jdbcType=VARCHAR},
-            </if>
-            <if test="productDesc != null">
-                #{productDesc,jdbcType=VARCHAR},
-            </if>
-            <if test="loadingRate != null">
-                #{loadingRate,jdbcType=VARCHAR},
-            </if>
-            <if test="boxNum != null">
-                #{boxNum,jdbcType=DECIMAL},
             </if>
             <if test="packingUnit != null">
                 #{packingUnit,jdbcType=VARCHAR},
@@ -185,20 +163,32 @@
             <if test="cnumber != null">
                 #{cnumber,jdbcType=DECIMAL},
             </if>
-            <if test="outNumber != null">
-                #{outNumber,jdbcType=DECIMAL},
+            <if test="boxNum != null">
+                #{boxNum,jdbcType=DECIMAL},
             </if>
-            <if test="finished != null">
-                #{finished,jdbcType=DECIMAL},
+            <if test="grossWeight != null">
+                #{grossWeight,jdbcType=DECIMAL},
             </if>
-            <if test="productRequest != null">
-                #{productRequest,jdbcType=VARCHAR},
+            <if test="netWeight != null">
+                #{netWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="sizeLength != null">
+                #{sizeLength,jdbcType=DECIMAL},
+            </if>
+            <if test="sizeWidth != null">
+                #{sizeWidth,jdbcType=DECIMAL},
+            </if>
+            <if test="sizeHeight != null">
+                #{sizeHeight,jdbcType=DECIMAL},
+            </if>
+            <if test="exPrice != null">
+                #{exPrice,jdbcType=DECIMAL},
             </if>
             <if test="price != null">
                 #{price,jdbcType=DECIMAL},
             </if>
-            <if test="amount != null">
-                #{amount,jdbcType=DECIMAL},
+            <if test="tax != null">
+                #{tax,jdbcType=DECIMAL},
             </if>
             <if test="orderNo != null">
                 #{orderNo,jdbcType=DECIMAL},
@@ -213,32 +203,17 @@
     </insert>
 
     <!--根据id更新-->
-    <update id="updateByPrimaryKeySelective" parameterType="com.hdm.domain.cargo.ContractProduct">
-        update co_contract_product
+    <update id="updateByPrimaryKeySelective" parameterType="com.hdm.domain.cargo.ExportProduct">
+        update co_export_product
         <set>
-            <if test="id != null">
-                contract_id = #{contractId,jdbcType=VARCHAR},
+            <if test="exportId != null">
+                export_id = #{exportId,jdbcType=VARCHAR},
             </if>
             <if test="factoryId != null">
                 factory_id = #{factoryId,jdbcType=VARCHAR},
             </if>
-            <if test="factoryName != null">
-                factory_name = #{factoryName,jdbcType=VARCHAR},
-            </if>
             <if test="productNo != null">
                 product_no = #{productNo,jdbcType=VARCHAR},
-            </if>
-            <if test="productImage != null">
-                product_image = #{productImage,jdbcType=VARCHAR},
-            </if>
-            <if test="productDesc != null">
-                product_desc = #{productDesc,jdbcType=VARCHAR},
-            </if>
-            <if test="loadingRate != null">
-                loading_rate = #{loadingRate,jdbcType=VARCHAR},
-            </if>
-            <if test="boxNum != null">
-                box_num = #{boxNum,jdbcType=DECIMAL},
             </if>
             <if test="packingUnit != null">
                 packing_unit = #{packingUnit,jdbcType=VARCHAR},
@@ -246,20 +221,32 @@
             <if test="cnumber != null">
                 cnumber = #{cnumber,jdbcType=DECIMAL},
             </if>
-            <if test="outNumber != null">
-                out_number = #{outNumber,jdbcType=DECIMAL},
+            <if test="boxNum != null">
+                box_num = #{boxNum,jdbcType=DECIMAL},
             </if>
-            <if test="finished != null">
-                finished = #{finished,jdbcType=DECIMAL},
+            <if test="grossWeight != null">
+                gross_weight = #{grossWeight,jdbcType=DECIMAL},
             </if>
-            <if test="productRequest != null">
-                product_request = #{productRequest,jdbcType=VARCHAR},
+            <if test="netWeight != null">
+                net_weight = #{netWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="sizeLength != null">
+                size_length = #{sizeLength,jdbcType=DECIMAL},
+            </if>
+            <if test="sizeWidth != null">
+                size_width = #{sizeWidth,jdbcType=DECIMAL},
+            </if>
+            <if test="sizeHeight != null">
+                size_height = #{sizeHeight,jdbcType=DECIMAL},
+            </if>
+            <if test="exPrice != null">
+                ex_price = #{exPrice,jdbcType=DECIMAL},
             </if>
             <if test="price != null">
                 price = #{price,jdbcType=DECIMAL},
             </if>
-            <if test="amount != null">
-                amount = #{amount,jdbcType=DECIMAL},
+            <if test="tax != null">
+                tax = #{tax,jdbcType=DECIMAL},
             </if>
             <if test="orderNo != null">
                 order_no = #{orderNo,jdbcType=DECIMAL},
@@ -273,23 +260,4 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-
-    <select id="findByShipTime" resultType="com.hdm.vo.ContractProductVo">
-        SELECT
-        c.custom_name customName,
-        c.contract_no contractNo,
-        cp.product_no productNo,
-        cp.cnumber  cnumber,
-        cp.factory_name factoryName,
-        c.delivery_period deliveryPeriod,
-        c.ship_time shipTime,
-        c.trade_terms tradeTerms
-        FROM co_contract c , co_contract_product cp
-        WHERE 1=1
-        and c.id = cp.contract_id
-        and c.company_id=#{companyId}
-        AND DATE_FORMAT(c.ship_time,'%Y-%m')=#{shipTime}
-    </select>
-
-
 </mapper>
