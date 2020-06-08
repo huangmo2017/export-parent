@@ -173,15 +173,16 @@ public class ExportController extends BaseController {
       vo.setProducts(products);
 
       //4.电子报运
-      WebClient client = WebClient.create("http://localhost:9091/ws/export/user");
+      WebClient client = WebClient.create("http://localhost:9090/ws/export/user");
       client.post(vo);
       //5.查询报运结果
-      client = WebClient.create("http://localhost:9091/ws/export/user/"+id);
+      client = WebClient.create("http://localhost:9090/ws/export/user/"+id);
       ExportResult result = client.get(ExportResult.class);
 
       //6.调用service完成报运结果的入库
       exportService.updateExport(result);
       return "redirect:/cargo/export/list.do";
+
    }
 
 }

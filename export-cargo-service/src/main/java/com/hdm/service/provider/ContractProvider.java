@@ -12,4 +12,5 @@ public class ContractProvider {
         context.start();
         System.in.read();
     }
+
 }
